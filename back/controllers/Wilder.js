@@ -3,50 +3,38 @@ const WilderModel = require("../models/Wilder");
 
 module.exports = {
   create: async (req, res) => {
-    try {
-      await WilderModel.init();
-      const wilder = new WilderModel(req.body);
-      const result = await wilder.save();
-      res.status(201).json({ success: true, result: result });
-    } catch (err) {
-      res.status(500).json({ success: false, result: err });
-    }
+    await WilderModel.init();
+    const wilder = new WilderModel(req.body);
+    const result = await wilder.save();
+    res.status(201).json({ success: true, result: result });
   },
   getAll: async (req, res) => {
-    try {
-      await WilderModel.init();
-      const result = await WilderModel.find();
-      if (result.length === 0) {
-        res.status(404).json({
-          success: true,
-          result: "Aucun Wilder inscrit pour le moment",
-        });
-      } else {
-        res.status(200).json({ success: true, result: result });
-      }
-    } catch (err) {
-      res.status(500).json({ success: false, result: err });
+    await WilderModel.init();
+    const result = await WilderModel.find();
+    if (result.length === 0) {
+      res.status(200).json({
+        success: true,
+        result: "Aucun wilder inscrit pour le moment !",
+      });
     }
+    res.status(200).json({ success: true, result: result });
   },
   updateById: async (req, res) => {
-    try {
-      await WilderModel.init();
+    await WilderModel.init();
+    const isWilderExist = await WilderModel.findOne({ _id: req.params.id });
+    if (!isWilderExist) {
+      res.status(200).json({ success: true, result: "Inconnu au bataillon" });
+    } else {
       const result = await WilderModel.updateOne(
         { _id: req.params.id },
         { ...req.body }
       );
       res.status(200).json({ success: true, result: result });
-    } catch (err) {
-      res.status(500).json({ success: false, result: err });
     }
   },
   deleteById: async (req, res) => {
-    try {
-      await WilderModel.init();
-      await WilderModel.findOneAndDelete(req.params.id);
-      res.status(204);
-    } catch (err) {
-      res.status(500).json({ success: false, result: err });
-    }
+    await WilderModel.init();
+    await WilderModel.findOneAndDelete({ _id: req.params.id });
+    res.status(204);
   },
 };
