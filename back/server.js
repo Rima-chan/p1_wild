@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use("/api/wilders", wilderRoutes);
 
-app.get("*", (req, res) => {
+app.use("/", (req, res) => {
   res.status(404);
   res.send({ success: false, message: "Wrong adress" });
 });
