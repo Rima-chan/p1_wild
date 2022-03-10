@@ -2,9 +2,10 @@ import React from "react";
 import { WilderCard } from "./WilderCard";
 import { WildersContext } from "../context";
 import { useEffect, useContext } from "react";
+import { DisplayMessage } from "./DisplayMessage";
 
 export const CardList = () => {
-  const { wilders, setWilders, fetchData } = useContext(WildersContext);
+  const { wilders, fetchData, error } = useContext(WildersContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -12,6 +13,7 @@ export const CardList = () => {
     <main className="container">
       <h2>Wilders</h2>
       <section className="card-row">
+        {error ? <DisplayMessage message={error} /> : null}
         {wilders.map((wilder, index) => (
           <WilderCard
             key={`${wilder.name}-${index}`}

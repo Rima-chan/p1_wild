@@ -6,9 +6,10 @@ export const WildersContext = createContext();
 
 export const WildersProvider = ({ children }) => {
   const [wilders, setWilders] = useState([]);
+  const [error, setError] = useState("");
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/wilders");
+      const response = await axios.get("http://localhost:8080/api/wildqsers");
       setWilders(response.data.result);
       console.log(wilders);
     } catch (error) {
@@ -26,7 +27,11 @@ export const WildersProvider = ({ children }) => {
         return [newWilder, ...prevWilders];
       });
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status != 404) {
+        setError(error.response.data.result);
+      } else {
+        setError("An error occured 😥");
+      }
     }
   };
   return (
@@ -36,6 +41,8 @@ export const WildersProvider = ({ children }) => {
         setWilders,
         fetchData,
         postData,
+        error,
+        setError,
       }}
     >
       {children}
@@ -46,20 +53,3 @@ export const WildersProvider = ({ children }) => {
 export const useWildersContext = () => {
   return useContext(WildersContext);
 };
-
-// const [wilders, setWilders] = useState([]);
-// const fetchData = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:8080/api/wilders");
-//     console.log(response);
-//     setWilders(response.data.result);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// const updateWilders = (newWilders) => {
-//   setWilders([...wilders, newWilders]);
-// };
-// useEffect(() => {
-//   fetchData();
-// }, []);

@@ -28,7 +28,7 @@ app.use((error, req, res, next) => {
 
 app.use("/", (req, res) => {
   res.status(404);
-  res.send({ success: false, message: "Wrong adress" });
+  res.send({ success: false, result: "Wrong adress" });
 });
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

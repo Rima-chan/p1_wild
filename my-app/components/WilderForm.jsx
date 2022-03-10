@@ -9,11 +9,11 @@ export const WilderForm = () => {
     city: "",
     skill: [],
   });
-  const [error, setError] = useState("");
-  const { wilders, setWilders, postData } = useContext(WildersContext);
+  const { postData, error } = useContext(WildersContext);
   const onSubmit = async (e) => {
     e.preventDefault();
     postData(newWilder);
+    console.log(error);
   };
   return (
     <>
