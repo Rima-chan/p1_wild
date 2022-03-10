@@ -62,3 +62,44 @@ footer {
   grid-template-columns: repeat(3, 32%);
   justify-content: space-between;
 }
+
+form {
+  display: grid;
+  place-content: center;
+  grid-gap: 0.5rem;
+  background-color: #e9f2fd;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+label {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+input {
+  font-size: 16px;
+  font-size: Max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid #f76c6c;
+  border-radius: 4px;
+  transition: 180ms box-shadow ease-in-out;
+}
+
+button {
+  background-color: #f76c6c;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.error {
+  background-color: red;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+}
