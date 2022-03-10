@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const wilderRoutes = require("./routes/wilder");
 const cors = require("cors");
 const app = express();
+const PORT = 8080;
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/wilder_db", { autoIndex: true })
@@ -15,11 +16,6 @@ app.use(cors());
 
 app.use("/api/wilders", wilderRoutes);
 
-app.use("/", (req, res) => {
-  res.status(404);
-  res.send({ success: false, message: "Wrong adress" });
-});
-
 app.use((error, req, res, next) => {
   if (error.name === "MongoServerError" && error.code === 11000) {
     res.status(400).json({ success: false, result: "Ce nom est déjà pris ! " });
@@ -30,4 +26,9 @@ app.use((error, req, res, next) => {
   }
 });
 
-app.listen(3000, () => console.log("Server started on 3000"));
+app.use("/", (req, res) => {
+  res.status(404);
+  res.send({ success: false, message: "Wrong adress" });
+});
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

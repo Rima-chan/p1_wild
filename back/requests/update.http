@@ -1,4 +1,4 @@
-PUT http://localhost:3000/api/wilders/6228a4c9f3dd97a3cfca767f HTTP/1.1
+PUT http://localhost:8080/api/wilders/6228a4c9f3dd97a3cfca767f HTTP/1.1
 content-type: application/json
 
 {
