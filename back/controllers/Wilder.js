@@ -1,9 +1,9 @@
-const Wilder = require("../models/Wilder");
 const WilderModel = require("../models/Wilder");
 
 module.exports = {
   create: async (req, res) => {
     await WilderModel.init();
+    console.log(req.body);
     const wilder = new WilderModel(req.body);
     const result = await wilder.save();
     res.status(201).json({ success: true, result: result });
@@ -11,19 +11,15 @@ module.exports = {
   getAll: async (req, res) => {
     await WilderModel.init();
     const result = await WilderModel.find();
-    if (result.length === 0) {
-      res.status(200).json({
-        success: true,
-        result: "Aucun wilder inscrit pour le moment !",
-      });
-    }
     res.status(200).json({ success: true, result: result });
   },
   updateById: async (req, res) => {
     await WilderModel.init();
     const isWilderExist = await WilderModel.findOne({ _id: req.params.id });
     if (!isWilderExist) {
-      res.status(200).json({ success: true, result: "Inconnu au bataillon" });
+      res
+        .status(200)
+        .json({ success: true, result: "This wilder doesn't exist ! 🦚" });
     } else {
       const result = await WilderModel.updateOne(
         { _id: req.params.id },

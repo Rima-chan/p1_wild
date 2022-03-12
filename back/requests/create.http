@@ -2,7 +2,7 @@ POST http://localhost:8080/api/wilders HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Louis",
+    "name": "Yannis",
     "city": "Paris",
     "skills":[
         {"title":"express", "votes":5},

@@ -18,9 +18,11 @@ export const WilderCard = ({ name, city, skills }) => {
       </p>
       <h4>Wild Skills</h4>
       <ul className={styles.skills}>
-        {skills.map((skill) => (
-          <Skill title={skill.title} votes={skill.votes} />
-        ))}
+        {skills && skills.length > 0
+          ? skills.map((skill) => (
+              <Skill key={skill.id} title={skill.title} votes={skill.votes} />
+            ))
+          : null}
       </ul>
     </article>
   );

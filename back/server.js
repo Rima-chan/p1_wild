@@ -18,9 +18,13 @@ app.use("/api/wilders", wilderRoutes);
 
 app.use((error, req, res, next) => {
   if (error.name === "MongoServerError" && error.code === 11000) {
-    res.status(400).json({ success: false, result: "Ce nom est déjà pris ! " });
+    res
+      .status(400)
+      .json({ success: false, result: "This name is already taken 🙁" });
   } else if (error.name === "CastError" && error.path === "_id") {
-    res.status(400).json({ success: false, result: "L'id n'est pas valide !" });
+    res
+      .status(400)
+      .json({ success: false, result: "Sorry we cannot find you 😥" });
   } else {
     res.status(400).json({ success: false, result: "Unknown error" + error });
   }

@@ -1,4 +1,4 @@
-form {
+/* form {
   display: grid;
   place-content: center;
   grid-gap: 0.5rem;
@@ -29,11 +29,46 @@ button {
   padding: 0.5em 1em;
   border-radius: 4px;
   display: inline-block;
-}
+} */
 
 .error {
   background-color: red;
   color: #fff;
   padding: 0.5em 1em;
   border-radius: 4px;
+}
+
+.skills {
+  display: inline-flex;
+}
+
+.skills label {
+  margin-bottom: 0.5em;
+}
+
+.skills input {
+  margin-bottom: 0.5em;
+}
+
+.skills_inputs {
+  display: inline-flex;
+  flex-direction: column;
+  margin-right: 0.5em;
+}
+
+.skills_button {
+  align-self: center;
+  height: 3em;
+  border-radius: 50%;
+}
+
+.skills_label {
+  font-size: 0.9em;
+}
+
+.skills_h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1;
+  margin-bottom: 0.5em;
 }

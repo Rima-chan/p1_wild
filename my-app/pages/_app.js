@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { WildersProvider } from "../context";
+import { WildersProvider } from "../services/context/index";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
