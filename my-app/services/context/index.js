@@ -20,71 +20,17 @@ export const WildersProvider = ({ children }) => {
       const data = await create(newWilder);
       dispatch({ type: actions.CREATE_WILDER, payload: data });
     },
+    updateWilder: async (updatedWilder, id) => {
+      await update(id, updatedWilder);
+      const data = await getAll();
+      dispatch({ type: actions.GET_WILDERS, payload: data });
+    },
+    deleteWilder: async (id) => {
+      const data = await deleteById(id);
+      dispatch({ type: actions.DELETE_WILDER, payload: { data, id } });
+    },
   };
   return (
     <WildersContext.Provider value={value}>{children}</WildersContext.Provider>
   );
 };
-
-// const [wilders, setWilders] = useState([]);
-// const [error, setError] = useState("");
-// const fetchData = async () => {
-//   try {
-//     const response = await axios.get("http://localhost:8080/api/wilders");
-//     setWilders(response.data.result);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// const postData = async (data) => {
-//   try {
-//     const response = await axios.post(
-//       "http://localhost:8080/api/wilders",
-//       data
-//     );
-//     const newWilder = response.data.result;
-//     setWilders((prevWilders) => {
-//       return [newWilder, ...prevWilders];
-//     });
-//   } catch (error) {
-//     if (error.response && error.response.status != 404) {
-//       setError(error.response.data.result);
-//     } else {
-//       setError("An error occured 😥");
-//     }
-//   }
-// };
-
-// if (action.payload.success) {
-//         return {
-//           ...state,
-//           wilders: [...state.wilders, action.payload.result],
-//         };
-//       } else if (
-//         action.payload.response &&
-//         action.payload.response.status != 404
-//       ) {
-//         return {
-//           ...state,
-//           error: action.payload.response.data.result,
-//           wilders: [],
-//         };
-//       } else {
-//         return { ...state, error: "An error occured 😥", wilders: [] };
-//       }
-//     }
-
-// const value = {
-//   wilders: state.wilders,
-//   error: state.error,
-//   getWilders: async () => {
-//     const data = await getAll();
-//     dispatch({ type: actions.GET_WILDERS, payload: data });
-//     console.log(state.wilders);
-//   },
-//   addWilder: async (newWilder) => {
-//     const data = await create(newWilder);
-//     dispatch({ type: actions.CREATE_WILDER, payload: newWilder });
-//     console.log(state.wilders);
-//   },
-// };

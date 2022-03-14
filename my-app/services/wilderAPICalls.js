@@ -19,9 +19,19 @@ export const create = async (data) => {
     return error.response;
   }
 };
-export const update = (id, data) => {
-  http.put(`/wilders/${id}`);
+export const update = async (id, data) => {
+  try {
+    const response = await axios.put(`${URL}/${id}/`, data);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
 };
-export const deleteById = (id) => {
-  http.delete(`/wilders/${id}`);
+export const deleteById = async (id) => {
+  try {
+    const response = await axios.delete(`${URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    return error.response;
+  }
 };

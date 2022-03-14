@@ -14,14 +14,13 @@ export const CardList = () => {
   return (
     <main className="container">
       <h2>Wilders</h2>
-      {errors && errors.fetch ? (
-        <DisplayMessage message={errors.fetch} />
-      ) : null}
+      {errors.fetch ? <DisplayMessage message={errors.fetch} /> : null}
       <section className="card-row">
         {wilders.length > 0 ? (
           wilders.map((wilder, index) => (
             <WilderCard
-              key={`${wilder.name}-${index}`}
+              key={wilder._id}
+              id={wilder._id}
               name={wilder.name}
               city={wilder.city}
               skills={wilder.skills}

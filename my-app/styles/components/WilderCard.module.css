@@ -3,6 +3,8 @@
   border: 1px solid #c9c9c9;
   border-radius: 7px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
 }
 
 .card > img:first-child {
@@ -35,12 +37,40 @@
 .button {
   /* Reset text link default */
   text-decoration: none;
-
   background-color: #f76c6c;
   color: #fff;
   padding: 0.5em 1em;
   border-radius: 4px;
   display: inline-block;
+}
+
+.action_button {
+  color: #f76c6c;
+  border: none;
+  background-color: transparent;
+  font-weight: 900;
+  padding: 0;
+  align-self: flex-end;
+  margin-top: -0.5em;
+  transition: none;
+}
+
+.action_button:hover {
+  background-color: transparent;
+  color: #c23c3c;
+}
+
+.skills_wrapper {
+  display: flex;
+}
+
+.skills_wrapper button {
+  font-size: 1.2em;
+  margin-left: 00.5em;
+}
+
+.skills_wrapper h4 {
+  margin: 0;
 }
 
 .card .skills {

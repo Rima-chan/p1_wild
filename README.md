@@ -8,7 +8,7 @@
 
 ### Disclaimer
 
-This is a school project. I wanted to go deeper with `useContext` and `useReducer` react's hooks with asynchronous. This is certainly not optimised or even good practise for a "real wordl" projet
+This is a school project. I wanted to try and test `useContext` and `useReducer` react's hooks with asynchronous actions. This is certainly not optimised or even good practise for a "real world" projet
 
 ### Technologies
 
@@ -36,3 +36,5 @@ This is a school project. I wanted to go deeper with `useContext` and `useReduce
 #### Front
 
 Run `npm run dev` for development
+
+---

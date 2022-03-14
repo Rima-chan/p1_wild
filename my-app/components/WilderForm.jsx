@@ -1,44 +1,47 @@
 import React, { useState, useContext } from "react";
 import { DisplayMessage } from "./DisplayMessage";
 import { WildersContext } from "../services/context/index";
+import { Skill } from "./Skill";
 import styles from "../styles/components/WilderForm.module.css";
 
 export const WilderForm = () => {
   const [newWilder, setNewWilder] = useState({
     name: "",
     city: "",
+    skills: [],
   });
   const [skill, setSkill] = useState({
     title: "",
     votes: "",
   });
-  const [skills, setSkills] = useState([]);
   const [formValidation, setFormValidation] = useState("");
   const { addWilder, wilders, errors } = useContext(WildersContext);
   const onSubmit = async (e) => {
     e.preventDefault();
     addWilder(newWilder);
     setNewWilder((prevState) => {
-      return { ...prevState, name: "", city: "" };
+      return { ...prevState, name: "", city: "", skills: [] };
     });
   };
   const onClick = () => {
     if (!skill.title || !skill.votes) {
-      setFormValidation("You should enter a skill with a title and votes");
+      setFormValidation("Title or votes skill is empty");
     } else {
-      setSkills((prevState) => {
-        return [...prevState, skill];
+      setNewWilder((prevState) => {
+        return { ...prevState, skills: [...newWilder.skills, skill] };
       });
       setSkill((prevState) => {
         return { ...prevState, title: "", votes: "" };
       });
     }
-    console.log(skills);
-    console.log(formValidation);
+    console.log(newWilder.skills);
+  };
+  const handleBlur = () => {
+    setFormValidation("");
   };
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="add_form">
         <label htmlFor="name-input">Name :</label>
         <input
           id="name-input"
@@ -68,7 +71,7 @@ export const WilderForm = () => {
           <span className={styles.skills_inputs}>
             <h3 className={styles.skills_h3}>Skills : </h3>
             <label htmlFor="skill-input" className={styles.skills_label}>
-              Title :{" "}
+              Title :
             </label>
             <input
               id="skill-input"
@@ -77,7 +80,7 @@ export const WilderForm = () => {
               value={skill.title}
               onChange={(e) =>
                 setSkill((prevState) => {
-                  return { ...skill, title: e.target.value };
+                  return { ...prevState, title: e.target.value };
                 })
               }
             ></input>
@@ -90,11 +93,11 @@ export const WilderForm = () => {
               value={skill.votes || ""}
               onChange={(e) =>
                 setSkill((prevState) => {
-                  return { ...skill, votes: e.target.value };
+                  return { ...prevState, votes: e.target.value };
                 })
               }
             >
-              <option value="">-- Please choose an option--</option>
+              <option value="">-- Please choose an option --</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -110,10 +113,16 @@ export const WilderForm = () => {
           <button
             type="button"
             onClick={onClick}
+            onBlur={handleBlur}
             className={styles.skills_button}
           >
             +
           </button>
+        </span>
+        <span>
+          {newWilder.skills.map((skill, index) => {
+            <Skill title={skill.title} votes={skill.votes} />;
+          })}
         </span>
         <button type="submit">Add</button>
         {errors && errors.post ? (

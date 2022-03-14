@@ -21,7 +21,7 @@ module.exports = {
         .status(200)
         .json({ success: true, result: "This wilder doesn't exist ! 🦚" });
     } else {
-      const result = await WilderModel.updateOne(
+      const result = await WilderModel.findOneAndUpdate(
         { _id: req.params.id },
         { ...req.body }
       );
@@ -31,6 +31,6 @@ module.exports = {
   deleteById: async (req, res) => {
     await WilderModel.init();
     await WilderModel.findOneAndDelete({ _id: req.params.id });
-    res.status(204);
+    res.status(200).json({ success: true });
   },
 };

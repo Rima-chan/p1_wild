@@ -1,7 +1,7 @@
-PUT http://localhost:8080/api/wilders/6228a4c9f3dd97a3cfca767f HTTP/1.1
+PUT http://localhost:8080/api/wilders/622e68ead42366d33f575b4d HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Marie",
+    "name": "JEANS",
     "city": "Paris"
 }

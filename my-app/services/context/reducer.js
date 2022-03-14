@@ -5,11 +5,18 @@ export const initialState = {
   errors: {},
 };
 
+const errorMessage = "An error occured 😥";
+
 export const wildersReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.GET_WILDERS: {
       if (action.payload.success) {
-        return { ...state, wilders: action.payload.result };
+        console.log(action.payload.result);
+        return {
+          ...state,
+          wilders: action.payload.result,
+          errors: {},
+        };
       } else if (action.payload.status !== 404 && action.payload.data.result) {
         return {
           ...state,
@@ -18,7 +25,7 @@ export const wildersReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          errors: { ...state.errors, fetch: "An error occured 😥" },
+          errors: { ...state.errors, fetch: errorMessage },
         };
       }
     }
@@ -27,6 +34,7 @@ export const wildersReducer = (state = initialState, action) => {
         return {
           ...state,
           wilders: [action.payload.result, ...state.wilders],
+          errors: {},
         };
       } else if (action.payload.status !== 404 && action.payload.data.result) {
         return {
@@ -36,7 +44,31 @@ export const wildersReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          errors: { ...state.errors, post: "An error occured 😥" },
+          errors: { ...state.errors, post: errorMessage },
+        };
+      }
+    }
+    case actions.UPDATE_WILDER: {
+      return {
+        ...state,
+        wilders: action.payload.result,
+      };
+    }
+    case actions.DELETE_WILDER: {
+      if (action.payload.data.success) {
+        return {
+          ...state,
+          wilders: [
+            ...state.wilders.filter(
+              (wilder) => wilder._id !== action.payload.id
+            ),
+          ],
+          errors: {},
+        };
+      } else {
+        return {
+          ...state,
+          errors: { ...state.errors, delete: errorMessage },
         };
       }
     }
